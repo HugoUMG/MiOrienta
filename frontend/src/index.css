@@ -1,0 +1,37 @@
+:root {
+  /* Paleta: azul marino + azul + negro + grises */
+  --bg: #eef2f9;
+  --bg2: #f7f9fd;
+  --card: #ffffff;
+  --text: #0f1b2d;
+  --muted: #5c6b80;
+  --navy: #12294d;
+  --navy-2: #0b1a33;
+  --accent: #1d4ed8;
+  --accent-2: #0ea5e9;
+  --bot-bubble: #e7edf9;
+  --user-bubble: #1d4ed8;
+  /* Tokens de superficie para el chat premium (hairlines, foco, sombras) */
+  --line: #e4e9f3;
+  --line-2: #cfd8ea;
+  --ring: rgba(29, 78, 216, 0.14);
+  --shadow-sm: 0 1px 2px rgba(15, 27, 45, 0.05), 0 2px 6px -2px rgba(15, 27, 45, 0.06);
+  --shadow-md: 0 14px 34px -18px rgba(15, 27, 45, 0.30);
+  --shadow-lg: 0 44px 100px -40px rgba(11, 26, 51, 0.55);
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  color: var(--text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  background: radial-gradient(circle at 50% 0%, var(--bg2), var(--bg));
+}
+
+#root {
+  width: 100%;
+}

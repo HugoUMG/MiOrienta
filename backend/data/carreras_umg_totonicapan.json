@@ -1,0 +1,22 @@
+{
+  "departamento": "Totonicapán",
+  "centro": "UMG Totonicapán",
+  "universidad": "Universidad Mariano Gálvez",
+  "carreras": [
+    {
+      "nombre": "Licenciatura en Ciencias de la Administración",
+      "perfil_id": "administracion_empresas",
+      "sello": "Enfoque en liderazgo y construcción de equipos de alto rendimiento, con uso de herramientas tecnológicas e investigación de operaciones para optimizar decisiones."
+    },
+    {
+      "nombre": "Licenciatura en Ciencias Jurídicas y Sociales (Abogado y Notario)",
+      "perfil_id": "ciencias_juridicas",
+      "sello": "Énfasis muy práctico y procesal (clínicas jurídicas): forma 'abogados de estrado' con litigación estratégica y fuerte conexión con medicina forense y criminología."
+    },
+    {
+      "nombre": "Licenciatura en Enfermería",
+      "perfil_id": "enfermeria",
+      "sello": "Perfil muy práctico (13 ciclos, fuerte carga de prácticas supervisadas), con énfasis en intervención en crisis y manejo de urgencias."
+    }
+  ]
+}

@@ -1,0 +1,1777 @@
+/* --- Páginas informativas (inicio, acerca, catálogo, parámetros) --- */
+.pagina {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  padding: 16px 5vw;
+  background: var(--card);
+  box-shadow: 0 2px 14px rgba(15, 27, 45, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--navy);
+  text-decoration: none;
+  margin-right: auto;
+}
+.nav-logo svg {
+  padding: 5px;
+  border-radius: 50%;
+  color: var(--accent);
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.6), rgba(219, 234, 254, 0.3));
+  backdrop-filter: blur(8px) saturate(160%);
+  -webkit-backdrop-filter: blur(8px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8), 0 4px 10px -6px rgba(18, 41, 77, 0.35);
+}
+.nav-links {
+  display: flex;
+  gap: 22px;
+}
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14.5px;
+  font-weight: 600;
+  padding: 6px 2px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+.nav-links a:hover { color: var(--accent); }
+.nav-links a.active { color: var(--navy); border-bottom-color: var(--accent); }
+.nav-cta {
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.2s;
+}
+.nav-cta:hover { background: var(--navy); transform: translateY(-1px); }
+
+.nav-cuenta { display: flex; align-items: center; gap: 10px; position: relative; }
+.nav-nombre { color: var(--navy); font-weight: 600; font-size: 14px; }
+.nav-salir {
+  border: none;
+  background: none;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.nav-salir:hover { color: var(--accent); }
+.nav-login-error {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 6px;
+  color: #8a1c1c;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  .nav { flex-wrap: wrap; gap: 12px; }
+  .nav-links { order: 3; width: 100%; flex-wrap: wrap; justify-content: center; gap: 10px 16px; }
+}
+
+/* Hero azul marino con ondas */
+.hero {
+  position: relative;
+  background: linear-gradient(150deg, var(--navy-2), var(--navy) 55%, #17376b);
+  color: #fff;
+  padding: 84px 6vw 150px;
+  overflow: hidden;
+}
+.hero-texto {
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
+}
+.hero h1 {
+  margin: 0 0 18px;
+  font-size: clamp(34px, 5.4vw, 58px);
+  line-height: 1.08;
+  letter-spacing: -0.5px;
+}
+.hero p {
+  margin: 0 0 28px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #c4d3ec;
+  max-width: 470px;
+}
+.hero-ondas {
+  position: absolute;
+  inset: auto 0 0 0;
+  width: 100%;
+  height: 62%;
+  pointer-events: none;
+}
+.hero-btn {
+  border: none;
+  background: var(--accent-2);
+  color: #062033;
+  border-radius: 999px;
+  padding: 15px 32px;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 12px 30px -10px rgba(14, 165, 233, 0.55);
+  transition: transform 0.15s, background 0.2s;
+}
+.hero-btn:hover { transform: translateY(-2px); background: #38bdf8; }
+
+/* Sección "cómo funciona" */
+.pasos {
+  padding: 72px 6vw 30px;
+  text-align: center;
+}
+.pasos-kicker {
+  display: inline-block;
+  color: var(--accent);
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.pasos h2 {
+  margin: 0 auto 44px;
+  font-size: clamp(24px, 3.4vw, 34px);
+  color: var(--navy);
+  max-width: 520px;
+  line-height: 1.2;
+}
+.pasos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 26px;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+.paso-card {
+  position: relative;
+  background: var(--card);
+  border-radius: 20px;
+  padding: 38px 28px 32px;
+  box-shadow: 0 14px 40px -22px rgba(18, 41, 77, 0.35);
+  border: 1px solid rgba(18, 41, 77, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.paso-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+.paso-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 26px 50px -24px rgba(18, 41, 77, 0.42);
+  border-color: rgba(29, 78, 216, 0.18);
+}
+.paso-card:hover::before { opacity: 1; }
+.card-paso-num {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.paso-card h3 { margin: 4px 0 10px; color: var(--navy); font-size: 18.5px; }
+.paso-card p { margin: 0; color: var(--muted); font-size: 14.5px; line-height: 1.6; }
+
+/* Selector de los 3 modos del inicio (solo chat / solo Holland / los dos).
+   Reusa .paso-card; lo único propio es el botón abajo y el sello del
+   recomendado. El texto crece distinto en cada tarjeta, así que el botón se
+   empuja al fondo con margin-top:auto para que los tres queden alineados. */
+.modo-card { justify-content: flex-start; }
+.modo-card .hero-btn { margin-top: auto; padding-top: 12px; padding-bottom: 12px; }
+.modo-card p { margin-bottom: 22px; }
+.modo-minutos {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.modo-destacado { border-color: rgba(29, 78, 216, 0.35); }
+.modo-destacado::before { opacity: 1; }
+.modo-sello {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: 999px;
+}
+
+/* Badge de ícono compartido (pasos, acerca) */
+.card-icono {
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 17px;
+  margin-bottom: 16px;
+  color: var(--accent);
+  background: linear-gradient(150deg, var(--bot-bubble), #f2f6fe);
+  box-shadow: inset 0 0 0 1px rgba(29, 78, 216, 0.1);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.paso-card:hover .card-icono,
+.acerca-bloques article:hover .card-icono {
+  transform: scale(1.06);
+  box-shadow: inset 0 0 0 1px rgba(29, 78, 216, 0.22), 0 8px 20px -10px rgba(29, 78, 216, 0.5);
+}
+
+/* Cierre: descripción general + botón */
+.cierre {
+  text-align: center;
+  padding: 40px 6vw 80px;
+}
+.cierre p {
+  max-width: 560px;
+  margin: 0 auto 26px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Contenido genérico de páginas internas */
+.contenido {
+  padding: 56px 4vw 80px;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+}
+.contenido h1 {
+  margin: 0 0 16px;
+  color: var(--navy);
+  font-size: clamp(26px, 4vw, 40px);
+  line-height: 1.15;
+}
+.contenido .intro {
+  max-width: 640px;
+  margin: 0 auto 36px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.6;
+}
+.contenido-angosto { max-width: 760px; }
+
+/* Parámetros: las 6 dimensiones */
+.dim-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 22px;
+}
+.dim-card {
+  position: relative;
+  background: var(--card);
+  border-radius: 20px;
+  padding: 34px 26px 30px;
+  box-shadow: 0 14px 40px -22px rgba(18, 41, 77, 0.35);
+  border: 1px solid rgba(18, 41, 77, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.dim-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+.dim-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 26px 50px -24px rgba(18, 41, 77, 0.42);
+  border-color: rgba(29, 78, 216, 0.18);
+}
+.dim-card:hover::before { opacity: 1; }
+.dim-num {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  margin-bottom: 14px;
+  font-size: 15px;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(150deg, var(--accent), var(--accent-2));
+  box-shadow: 0 8px 18px -8px rgba(29, 78, 216, 0.6);
+  font-variant-numeric: tabular-nums;
+  transition: transform 0.18s ease;
+}
+.dim-card:nth-child(even) .dim-num {
+  background: linear-gradient(150deg, var(--accent-2), #38bdf8);
+}
+.dim-card:hover .dim-num { transform: scale(1.08); }
+.dim-card h3 { margin: 2px 0 3px; color: var(--navy); font-size: 18px; }
+.dim-corto {
+  display: block;
+  color: var(--accent);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  margin-bottom: 12px;
+}
+.dim-card p { margin: 0; color: var(--muted); font-size: 14.5px; line-height: 1.6; }
+
+/* Catálogo */
+.cat-filtros {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+.cat-buscar {
+  flex: 1 1 380px;
+  max-width: 560px;
+  border: 2px solid var(--bot-bubble);
+  background: var(--card);
+  border-radius: 999px;
+  padding: 13px 20px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.cat-buscar:focus { border-color: var(--accent); }
+.cat-select {
+  border: 2px solid var(--bot-bubble);
+  background: var(--card);
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
+  cursor: pointer;
+}
+.cat-select:focus { border-color: var(--accent); }
+.cat-deptos {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 34px;
+}
+.cat-deptos button {
+  border: 2px solid var(--accent);
+  background: #fff;
+  color: var(--accent);
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.cat-deptos button.sel,
+.cat-deptos button:hover { background: var(--accent); color: #fff; }
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 22px;
+}
+.cat-card {
+  position: relative;
+  background: var(--card);
+  border-radius: 20px;
+  padding: 30px 24px 24px;
+  box-shadow: 0 14px 40px -22px rgba(18, 41, 77, 0.35);
+  border: 1px solid rgba(18, 41, 77, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.cat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+.cat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 26px 50px -24px rgba(18, 41, 77, 0.42);
+  border-color: rgba(29, 78, 216, 0.18);
+}
+.cat-card:hover::before { opacity: 1; }
+.cat-icono {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 15px;
+  margin-bottom: 16px;
+  color: var(--accent);
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.6), rgba(219, 234, 254, 0.3));
+  backdrop-filter: blur(10px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8), 0 6px 16px -10px rgba(18, 41, 77, 0.35);
+  transition: transform 0.18s ease, box-shadow 0.2s;
+}
+.cat-card:hover .cat-icono {
+  color: var(--accent);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9), 0 10px 22px -10px rgba(14, 165, 233, 0.5);
+}
+.cat-card h3 {
+  margin: 0 0 12px;
+  color: var(--navy);
+  font-size: 16.5px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.cat-arquetipo {
+  margin: 0 0 20px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+  font-style: italic;
+  flex: 1;
+}
+.cat-sedes { width: 100%; margin-top: auto; }
+.cat-sedes summary {
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+}
+.cat-sedes summary::-webkit-details-marker { display: none; }
+.cat-sedes-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  background: var(--bot-bubble);
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 700;
+  transition: background 0.15s, color 0.15s;
+}
+.cat-sedes summary:hover .cat-sedes-pill { background: var(--accent); color: #fff; }
+.cat-sedes-chevron {
+  font-size: 15px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+.cat-sedes[open] .cat-sedes-chevron { transform: rotate(90deg); }
+.cat-card ul {
+  margin: 16px 0 0;
+  padding: 16px 0 0;
+  list-style: none;
+  border-top: 1px solid var(--bot-bubble);
+  text-align: center;
+}
+.cat-card li {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+  padding: 6px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.cat-card li strong { color: var(--navy); font-weight: 700; font-size: 13.5px; }
+.cat-sede-meta { color: var(--muted); font-size: 12px; }
+.cat-total {
+  color: var(--muted);
+  font-size: 13.5px;
+  margin-top: 40px;
+  font-weight: 500;
+}
+
+/* Acerca de */
+.acerca-bloques {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  text-align: center;
+}
+.acerca-bloques article {
+  position: relative;
+  background: var(--card);
+  border-radius: 20px;
+  padding: 36px 28px 32px;
+  box-shadow: 0 14px 40px -22px rgba(18, 41, 77, 0.35);
+  border: 1px solid rgba(18, 41, 77, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.acerca-bloques article::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+.acerca-bloques article:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 26px 50px -24px rgba(18, 41, 77, 0.42);
+  border-color: rgba(29, 78, 216, 0.18);
+}
+.acerca-bloques article:hover::before { opacity: 1; }
+.acerca-bloques h3 { margin: 4px 0 10px; color: var(--navy); font-size: 18.5px; }
+.acerca-bloques p { margin: 0; color: var(--muted); line-height: 1.65; font-size: 15px; }
+
+/* --- Página del mapa --- */
+.mapa-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 20px 72px;
+  gap: 8px;
+}
+.mapa-page h1 {
+  color: var(--navy);
+  margin: 0;
+  text-align: center;
+  font-size: clamp(26px, 4vw, 38px);
+}
+.mapa-page > p { color: var(--muted); margin: 0 0 18px; font-size: 16px; text-align: center; }
+
+/* Control segmentado (por departamento / por región) */
+.mapa-modos {
+  display: inline-flex;
+  gap: 4px;
+  margin-bottom: 24px;
+  padding: 5px;
+  background: var(--bot-bubble);
+  border-radius: 999px;
+  box-shadow: inset 0 1px 3px rgba(18, 41, 77, 0.08);
+}
+.mapa-modos button {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 9px 22px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.mapa-modos button:hover { color: var(--accent); }
+.mapa-modos button.sel {
+  background: #fff;
+  color: var(--accent);
+  box-shadow: 0 4px 12px -4px rgba(18, 41, 77, 0.25);
+}
+
+/* Panel que enmarca el mapa */
+.mapa-panel {
+  position: relative;
+  background: linear-gradient(160deg, #ffffff, #f4f8ff);
+  border: 1px solid rgba(18, 41, 77, 0.07);
+  border-radius: 26px;
+  padding: 30px 34px 20px;
+  box-shadow: 0 26px 60px -30px rgba(18, 41, 77, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.mapa-svg {
+  width: 100%;
+  max-width: 460px;
+  height: auto;
+  filter: drop-shadow(0 10px 18px rgba(18, 41, 77, 0.12));
+}
+.depto {
+  stroke: #fff;
+  stroke-width: 1.4;
+  transition: fill 0.18s, opacity 0.18s, transform 0.18s;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.depto.activo { fill: var(--accent); cursor: pointer; }
+.depto.activo:hover {
+  fill: var(--accent-2);
+  transform: scale(1.04);
+}
+.depto.inactivo { fill: #d4dbe6; opacity: 0.7; cursor: default; }
+
+/* Leyenda del mapa */
+.mapa-legend {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 4px;
+  border-top: 1px solid rgba(18, 41, 77, 0.07);
+  width: 100%;
+}
+.mapa-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.mapa-legend-dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 4px;
+}
+.mapa-legend-dot.activo { background: var(--accent); }
+.mapa-legend-dot.inactivo { background: #d4dbe6; }
+
+.mapa-ambos-btn {
+  margin-top: 28px;
+  border: none;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+  border-radius: 999px;
+  padding: 15px 32px;
+  font-size: 15.5px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 14px 30px -12px rgba(29, 78, 216, 0.6);
+  transition: transform 0.15s, box-shadow 0.2s;
+}
+.mapa-ambos-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 36px -12px rgba(29, 78, 216, 0.7);
+}
+
+/* Chat + radar en dos columnas (el radar se apila debajo en pantallas angostas) */
+/* El centrado vive aquí (no en body): las páginas de contenido son full-width. */
+.layout {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  min-height: 100svh;
+  padding: 24px 4vw;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.radar-aside {
+  flex: 0 0 260px;
+  position: sticky;
+  top: 24px;
+}
+
+@media (max-width: 720px) {
+  .layout { flex-direction: column; align-items: center; }
+  .radar-aside { flex: none; width: 100%; max-width: 480px; position: static; }
+}
+
+.chat {
+  flex: 1 1 760px; /* crece a lo ancho de #root; con radar comparte la fila */
+  width: 100%;
+  max-width: 900px;
+  height: min(90vh, 900px);
+  background: var(--card);
+  border-radius: 28px;
+  box-shadow:
+    var(--shadow-lg),
+    0 2px 10px -4px rgba(18, 41, 77, 0.12);
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@media (max-width: 720px) {
+  .chat { height: min(94svh, 820px); border-radius: 22px; }
+}
+
+/* --- Pantalla inicial: solo la burbuja flotante (toca para empezar) --- */
+.siri-idle {
+  flex: 1;
+  width: 100%;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  cursor: pointer;
+}
+.siri-idle-hint {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* --- Chat estilo Siri: solo el mensaje actual + orbe, sin historial visible --- */
+.chat.siri {
+  position: relative;
+  align-items: center;
+  justify-content: flex-end;
+  background: radial-gradient(circle at 50% 30%, rgba(14, 165, 233, 0.08), transparent 55%), var(--card);
+}
+/* --- Botones flotantes: vidrio esmerilado (ice glass) --- */
+.voz-toggle,
+.vel-toggle {
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.55), rgba(219, 234, 254, 0.25));
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8), 0 6px 16px -8px rgba(18, 41, 77, 0.3);
+  transition: transform 0.15s, box-shadow 0.2s, border-color 0.2s;
+  z-index: 2;
+}
+.voz-toggle:hover,
+.vel-toggle:hover,
+.vel-toggle.abierto {
+  transform: translateY(-1px);
+  border-color: var(--accent-2);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9), 0 8px 20px -8px rgba(14, 165, 233, 0.45);
+}
+.voz-toggle {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+}
+.vel-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+}
+.vel-wrap {
+  position: absolute;
+  top: 14px;
+  right: 62px;
+  z-index: 51;
+}
+.vel-toggle {
+  padding: 8px 13px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+}
+/* Menú desplegable de velocidades: mismo vidrio esmerilado que los botones.
+   La activa va en azul; el resto en texto normal. */
+.vel-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px;
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.94), rgba(219, 234, 254, 0.7));
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 14px;
+  box-shadow: 0 14px 30px -14px rgba(18, 41, 77, 0.4);
+}
+.vel-menu button {
+  border: none;
+  background: transparent;
+  border-radius: 9px;
+  padding: 7px 22px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.vel-menu button:hover { background: rgba(14, 165, 233, 0.12); }
+.vel-menu button.activo {
+  color: var(--accent);
+  font-weight: 700;
+  background: rgba(14, 165, 233, 0.08);
+}
+.siri-conf {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 600;
+}
+.siri-conf strong { color: var(--accent); }
+/* Modo 3: avisa que el chat está usando el perfil del test de Holland. Va
+   debajo del chip de confianza, que ocupa la esquina. */
+.siri-holland { top: 38px; }
+/* Test corto de personalidad: mismo chip, un renglón más abajo por si los dos
+   perfiles conviven (Holland + personalidad) en la misma sesión. */
+.siri-personalidad { top: 60px; }
+
+.siri-stage {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 32px;
+  text-align: center;
+}
+.siri-stage .robot {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+}
+.siri-stage .robot svg { width: 56px; height: 56px; }
+.siri-texto {
+  max-width: 560px;
+  font-size: 19px;
+  line-height: 1.42;
+  font-weight: 600;
+  color: var(--text);
+  animation: pop 0.35s ease;
+}
+.siri-texto.alerta {
+  color: #8a5a00;
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* --- Footer tipo dock (controles de respuesta) --- */
+.chat-footer {
+  flex-shrink: 0;
+  max-height: 82%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 20px 14px;
+  border-top: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--card), var(--bg2));
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-2) transparent;
+}
+.chat-footer::-webkit-scrollbar { width: 8px; }
+.chat-footer::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 999px; }
+
+/* Con muchas opciones (chips, listas largas) el footer podía comerse hasta el
+   82% y dejar tan poco alto al header que el robot quedaba recortado por el
+   overflow:hidden de .chat. Se le reserva un piso fijo. */
+@media (max-width: 720px) {
+  .chat-footer { max-height: calc(100% - 150px); }
+  .siri-stage { padding: 10px 20px; gap: 8px; }
+  .siri-stage .robot, .siri-stage .robot svg { width: 46px; height: 46px; }
+  .siri-texto { font-size: 17px; }
+}
+
+/* --- Robot: burbuja de vidrio esmerilado (ice glass) --- */
+.robot {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.55), rgba(219, 234, 254, 0.28));
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 0 0 8px rgba(14, 165, 233, 0.07),
+    inset 0 1px 1px rgba(255, 255, 255, 0.8),
+    inset 0 -6px 14px rgba(14, 165, 233, 0.12),
+    0 12px 30px -10px rgba(18, 41, 77, 0.45);
+  animation: bob 3s ease-in-out infinite;
+}
+.robot.robot-sm {
+  width: 46px;
+  height: 46px;
+  color: var(--accent);
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.55), rgba(219, 234, 254, 0.28));
+  backdrop-filter: blur(10px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8), 0 4px 14px -4px rgba(18, 41, 77, 0.35);
+  animation: none;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.robot .eye {
+  animation: blink 4s infinite;
+  transform-origin: center;
+}
+@keyframes blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  96% { transform: scaleY(0.1); }
+}
+
+.robot.thinking { animation: bob 1s ease-in-out infinite; }
+
+/* Cargando (la IA está pensando): reemplaza los "..." (el robot rebota y le
+   da vueltas un anillo, para que se vea que sigue trabajando. */
+.robot.cargando {
+  position: relative;
+  animation: bob 0.75s ease-in-out infinite;
+}
+.robot.cargando::after {
+  content: '';
+  position: absolute;
+  inset: -7px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: var(--accent);
+  border-right-color: var(--accent-2, var(--accent));
+  opacity: 0.75;
+  animation: girar 0.9s linear infinite;
+}
+@keyframes girar {
+  to { transform: rotate(360deg); }
+}
+.robot.robot-sm.thinking { animation: nod 0.9s ease-in-out infinite; }
+@keyframes nod {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+
+/* --- Radar de afinidad en tiempo real --- */
+.radar {
+  width: 100%;
+  background: var(--bg2);
+  border-radius: 16px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: pop 0.3s ease;
+}
+.radar-titulo {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.radar-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 3px;
+}
+.radar-nombre {
+  font-size: 12px;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.radar-pct { font-size: 12px; font-weight: 700; color: var(--muted); flex-shrink: 0; }
+.radar-track {
+  background: #fff;
+  border-radius: 999px;
+  height: 8px;
+  overflow: hidden;
+}
+.radar-fill {
+  height: 100%;
+  border-radius: 999px;
+  min-width: 4px;
+  transition: width 0.6s ease;
+}
+
+
+.bubble {
+  max-width: 76%;
+  padding: 13px 18px;
+  border-radius: 18px;
+  line-height: 1.55;
+  font-size: 15.5px;
+  animation: pop 0.28s ease;
+}
+
+/* Resaltado de términos clave dentro de los mensajes */
+.bubble strong { font-weight: 700; }
+.bubble.bot strong { color: var(--accent); }
+.bubble em { font-style: italic; }
+@keyframes pop {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.bubble.bot {
+  background: var(--card);
+  color: var(--text);
+  align-self: flex-start;
+  border: 1px solid var(--line);
+  border-bottom-left-radius: 6px;
+  box-shadow: var(--shadow-sm);
+}
+
+.bubble.user {
+  background: linear-gradient(140deg, var(--accent), #1e40af);
+  color: #fff;
+  align-self: flex-end;
+  border-bottom-right-radius: 6px;
+  box-shadow: 0 12px 26px -14px rgba(29, 78, 216, 0.7);
+}
+
+.bubble.alerta {
+  background: #fff4dc;
+  color: #8a5a00;
+  align-self: flex-start;
+  border-bottom-left-radius: 6px;
+  border-left: 3px solid #f0a500;
+  font-style: italic;
+  font-size: 13.5px;
+  max-width: 84%;
+}
+
+/* --- Input de texto (abiertas) --- */
+.aviso-input {
+  width: 100%;
+  margin: 0 0 8px;
+  color: #b91c1c;
+  font-size: 13px;
+  text-align: center;
+}
+
+.input-row {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+
+.input-row input {
+  flex: 1;
+  border: 1.5px solid var(--line-2);
+  background: #fff;
+  border-radius: 999px;
+  padding: 15px 22px;
+  font-size: 15.5px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input-row input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+.input-row button {
+  border: none;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 12px 24px -10px rgba(29, 78, 216, 0.7);
+  transition: transform 0.15s, opacity 0.2s, box-shadow 0.2s;
+}
+.input-row button:hover:not(:disabled) { transform: scale(1.07); box-shadow: 0 14px 28px -10px rgba(29, 78, 216, 0.85); }
+.input-row button:disabled { opacity: 0.35; cursor: default; box-shadow: none; }
+
+/* --- Botones de opción (Sí/No, CTAs) --- */
+.options {
+  width: 100%;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+.options.choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 10px;
+}
+/* "Otro / especificar…" y "Continuar" ocupan las dos columnas */
+.options.choices .opt-color.otro,
+.options.choices .continuar-btn {
+  grid-column: 1 / -1;
+}
+/* El banco de palabras son 15 opciones cortas: caben en 3 columnas */
+.options.choices.chips { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 860px) {
+  .options.choices.chips { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+  .options.choices,
+  .options.choices.chips { grid-template-columns: 1fr; }
+}
+
+/* Banco de palabras: chips que fluyen en varias filas */
+.options.chips {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.opt {
+  border: none;
+  background: linear-gradient(135deg, var(--accent), #2563eb);
+  color: #fff;
+  border-radius: 999px;
+  padding: 14px 26px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 12px 26px -12px rgba(29, 78, 216, 0.7);
+  transition: transform 0.15s, box-shadow 0.2s, filter 0.2s;
+}
+.opt:hover { transform: translateY(-2px); box-shadow: 0 16px 32px -12px rgba(29, 78, 216, 0.85); filter: brightness(1.03); }
+.opt:active { transform: translateY(0); }
+.options:not(.choices) .opt { flex: 1; }
+.opt.si { background: linear-gradient(135deg, var(--accent-2), #38bdf8); box-shadow: 0 12px 26px -12px rgba(14, 165, 233, 0.7); }
+.opt.no,
+.opt.ghost {
+  background: #fff;
+  color: var(--muted);
+  border: 1.5px solid var(--line-2);
+  box-shadow: none;
+}
+.opt.no:hover,
+.opt.ghost:hover {
+  color: var(--navy);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 5%, #fff);
+  filter: none;
+}
+
+/* --- Opciones tipo tarjeta (única / múltiple): punto de color + check --- */
+.opt-color {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  text-align: center;
+  border: 1.5px solid var(--line);
+  background: var(--card);
+  color: var(--text);
+  border-radius: 11px;
+  padding: 7px 40px 7px 14px; /* espacio a la derecha para el círculo, que ya no está en el flujo */
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.3;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.14s, border-color 0.16s, background 0.16s, box-shadow 0.18s;
+}
+/* punto = identidad de color de la opción */
+.opt-color::before {
+  content: '';
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--c);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 16%, transparent);
+  transition: box-shadow 0.16s, transform 0.16s;
+}
+/* círculo de selección (radio/checkbox): fuera del flujo, pegado a la derecha
+   de la celda; el texto queda centrado sin que el círculo lo empuje. */
+.opt-color::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--line-2);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 11px;
+  transition: border-color 0.16s, background-color 0.16s;
+}
+.opt-color:hover {
+  transform: translateY(-2px);
+  border-color: var(--c);
+  background: color-mix(in srgb, var(--c) 6%, #fff);
+  box-shadow: 0 12px 26px -16px var(--c);
+}
+.opt-color:hover::before { transform: scale(1.12); box-shadow: 0 0 0 5px color-mix(in srgb, var(--c) 22%, transparent); }
+.opt-color:hover::after { border-color: var(--c); }
+/* Seleccionada: SIEMPRE el azul de marca, no el color propio de la opción:
+   los tonos negro/gris de la paleta casi no se notaban como "elegida". */
+.opt-color.sel {
+  border-color: var(--accent);
+  border-width: 2px;
+  background: color-mix(in srgb, var(--accent) 14%, #fff);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent),
+    0 12px 28px -18px var(--accent);
+}
+.opt-color.sel::before {
+  background: var(--accent);
+  transform: scale(1.15);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 28%, transparent);
+}
+.opt-color.sel::after {
+  border-color: var(--accent);
+  background-color: var(--accent);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+}
+.opt-color.otro { font-style: italic; color: var(--muted); }
+
+/* Salida al responder: las no elegidas se desvanecen, la elegida se despide.
+   Dura lo mismo que el setTimeout de responder() en Chat.jsx (300ms). */
+.opt-color.saliendo,
+.continuar-btn.saliendo {
+  animation: opt-salir 0.3s ease forwards;
+  pointer-events: none;
+}
+.opt-color.elegido {
+  animation: opt-elegido 0.3s ease forwards;
+  pointer-events: none;
+}
+@keyframes opt-salir {
+  to { opacity: 0; transform: scale(0.95); }
+}
+@keyframes opt-elegido {
+  to { transform: translateY(-10px) scale(1.04); opacity: 0.85; }
+}
+
+/* La respuesta elegida queda bajo la pregunta mientras carga la siguiente. */
+.elegida-chip {
+  max-width: 520px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  border: 1.5px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, #fff);
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  animation: chip-entra 0.35s ease;
+}
+@keyframes chip-entra {
+  from { opacity: 0; transform: translateY(16px) scale(0.94); }
+}
+
+/* chips: pastillas compactas, sin el círculo de la derecha */
+.options.chips .opt-color {
+  width: auto;
+  gap: 9px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+.options.chips .opt-color::before {
+  width: 9px;
+  height: 9px;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 16%, transparent);
+}
+.options.chips .opt-color::after { display: none; }
+.options.chips .opt-color.otro-activo,
+.options.chips .continuar-btn {
+  flex: 1 0 100%;
+}
+
+/* Input "Otro" inline: la misma celda de opción se convierte en cuadro de
+   texto (mismo tamaño/posición), en vez de una fila aparte debajo. */
+.otro-input-inline {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: none;
+  outline: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  padding: 0;
+}
+.otro-input-inline::placeholder { color: var(--muted); font-style: italic; }
+
+/* El check decorativo no sirve aquí (no es una opción "clic para elegir"):
+   se reemplaza por un botón real para poder deseleccionar "Otro". */
+.opt-color.otro-activo::after { display: none; }
+.otro-quitar {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--line-2);
+  color: #fff;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.15s;
+}
+.otro-quitar:hover { background: #c0392b; }
+
+.continuar-btn {
+  align-self: stretch;
+  border: none;
+  background: linear-gradient(135deg, var(--accent), #2563eb);
+  color: #fff;
+  border-radius: 999px;
+  padding: 9px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  margin-top: 2px;
+  box-shadow: 0 14px 30px -14px rgba(29, 78, 216, 0.75);
+  transition: transform 0.14s, box-shadow 0.2s, filter 0.2s;
+}
+.continuar-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 18px 36px -14px rgba(29, 78, 216, 0.85); filter: brightness(1.03); }
+.continuar-btn:disabled {
+  background: var(--bot-bubble);
+  color: #9aa7bd;
+  box-shadow: none;
+  cursor: default;
+}
+
+/* --- Pantalla de carga --- */
+.loading-screen {
+  justify-content: center;
+  align-items: center;
+  gap: 26px;
+  padding: 48px 32px;
+  background:
+    radial-gradient(circle at 15% 8%, rgba(14, 165, 233, 0.07), transparent 42%),
+    radial-gradient(circle at 85% 92%, rgba(29, 78, 216, 0.07), transparent 42%),
+    var(--bg2);
+}
+.spinner-ring {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: conic-gradient(from 0deg, var(--accent), var(--accent-2), rgba(18, 41, 77, 0.10));
+  animation: spin 1.1s linear infinite;
+}
+.spinner-ring.err {
+  background: #ffe3e3;
+  animation: none;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.loading-text {
+  color: var(--muted);
+  font-size: 15px;
+  text-align: center;
+}
+
+/* --- Barra de progreso del análisis final --- */
+.progreso {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  animation: pop 0.3s ease;
+}
+.progreso-pct {
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -1px;
+}
+.progreso-track {
+  width: 100%;
+  height: 14px;
+  background: var(--bot-bubble);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progreso-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  box-shadow: 0 0 16px rgba(14, 165, 233, 0.5);
+  transition: width 1.3s ease;
+}
+.progreso .loading-text {
+  min-height: 20px; /* evita saltos al cambiar de mensaje */
+}
+
+/* --- Oferta: ver resultado o seguir chateando --- */
+.oferta {
+  width: 100%;
+  background: linear-gradient(160deg, #fff, var(--bg2));
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--line));
+  border-radius: 18px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 18px 40px -22px rgba(29, 78, 216, 0.5);
+  animation: pop 0.3s ease;
+}
+.oferta-msg {
+  margin: 0;
+  font-size: 15.5px;
+  line-height: 1.5;
+  color: var(--text);
+}
+.oferta-msg strong { color: var(--accent); }
+.oferta-btns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.oferta-btns .opt { flex: 1; }
+
+/* --- Botones auxiliares (regresar / terminar antes) --- */
+.regresar-btn {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: color 0.15s, background 0.15s;
+}
+.regresar-btn:hover { color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); }
+
+.terminar-btn {
+  align-self: center;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 13.5px;
+  cursor: pointer;
+  padding: 6px 10px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s;
+}
+.terminar-btn:hover { color: var(--accent); }
+
+/* --- Examen psicométrico (pestaña independiente del chat) --- */
+.psi-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 6px 0 18px;
+}
+.psi-tab {
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+.psi-tab.sel { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+.psi-progreso { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.psi-progreso-txt { color: var(--muted); font-size: 13px; white-space: nowrap; }
+
+.psi-barra {
+  flex: 1;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--line);
+  overflow: hidden;
+}
+.psi-barra > span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--navy), var(--accent));
+  transition: width 0.3s ease;
+}
+
+.psi-instruccion {
+  margin: 0 0 18px;
+  padding: 12px 16px;
+  border-left: 3px solid var(--accent);
+  background: var(--bot-bubble);
+  border-radius: 0 10px 10px 0;
+  color: var(--navy);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+.psi-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.psi-item {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px 18px;
+  box-shadow: var(--shadow-sm);
+}
+.psi-enunciado {
+  margin: 0 0 12px;
+  color: var(--text);
+  font-size: 15.5px;
+  line-height: 1.55;
+  display: flex;
+  gap: 10px;
+}
+.psi-num {
+  flex: 0 0 auto;
+  min-width: 26px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--bot-bubble);
+  color: var(--navy);
+  font-size: 12.5px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Grid, no flex: con flex-wrap la escala se partía en 2+2+1 y el último botón
+   ("Totalmente de acuerdo") quedaba del doble de ancho que los demás; en una
+   escala ordinal eso sesga la elección hacia el botón grande. */
+/* minmax(0, 1fr) y no 1fr: con 1fr la columna de la etiqueta más larga
+   ("Totalmente") crece por su min-content y queda unos píxeles más ancha que
+   las demás; el mismo sesgo de tamaño que se buscaba eliminar. */
+.psi-escala { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+.psi-opciones {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 8px;
+}
+/* Opciones de texto (secciones de razonamiento) */
+.psi-opciones button {
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line-2);
+  background: #fff;
+  color: var(--muted);
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.psi-opciones button:hover { border-color: var(--accent); color: var(--accent); }
+.psi-opciones button.sel {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* Escala de caritas (personalidad). --carita lo pone el JSX por botón: rojo el
+   1, verde el 5. El color NO rellena el botón: va en el trazo de la carita, el
+   borde y un tinte suave, para no depender de texto blanco sobre amarillo o
+   lima, que no contrasta. */
+.psi-escala button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 4px;
+  border-radius: 12px;
+  border: 1px solid var(--line-2);
+  background: #fff;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+.psi-escala button svg { transition: transform 0.12s; }
+.psi-escala button:hover { color: var(--carita); border-color: var(--carita); }
+.psi-escala button:hover svg { transform: scale(1.08); }
+.psi-escala button.sel {
+  color: var(--carita);
+  border-color: var(--carita);
+  background: color-mix(in srgb, var(--carita) 12%, #fff);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--carita) 20%, transparent);
+}
+.psi-escala button.sel svg { transform: scale(1.12); }
+
+.psi-nav {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 26px 0 10px;
+}
+.psi-nav .hero-btn { margin-left: auto; }
+.psi-nav .hero-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+.psi-btn-sec {
+  background: none;
+  border: 1px solid var(--line-2);
+  border-radius: 10px;
+  padding: 10px 16px;
+  color: var(--muted);
+  font-size: 14px;
+  cursor: pointer;
+}
+.psi-btn-sec:hover:not(:disabled) { color: var(--accent); border-color: var(--accent); }
+.psi-btn-sec:disabled { opacity: 0.4; cursor: not-allowed; }
+.psi-faltan { color: var(--muted); font-size: 13px; }
+
+.psi-error {
+  margin: 12px 0;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: #fde8e8;
+  color: #8a1c1c;
+  font-size: 14.5px;
+}
+
+/* Resultados */
+.psi-bloque {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px 22px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow-sm);
+}
+.psi-bloque h2 { margin: 0 0 16px; color: var(--navy); font-size: 19px; }
+.psi-bloque h3 { margin: 0 0 8px; color: var(--navy); font-size: 15px; }
+
+/* Grid de 2 columnas para las tarjetas de carreras de Holland: menos scroll
+   que la lista de una columna que usa el dashboard de recomendación. */
+.carrera-lista.holland-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px; }
+@media (max-width: 640px) { .carrera-lista.holland-grid { grid-template-columns: 1fr; } }
+
+.psi-rasgo { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.psi-rasgo-nombre { flex: 0 0 190px; color: var(--muted); font-size: 13.5px; }
+.psi-rasgo-valor { flex: 0 0 34px; text-align: right; color: var(--navy); font-weight: 700; font-size: 14px; }
+
+.psi-flags { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+.psi-flags span {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+/* Verde/ámbar semánticos (validez del protocolo), igual que el badge de
+   confianza del dashboard: no son color de marca. */
+.psi-flags .ok { background: #e6f6ec; color: #1b6b3a; }
+.psi-flags .alerta { background: #fdf0dc; color: #8a5a12; }
+
+.psi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+.psi-grid .psi-bloque { margin-bottom: 0; }
+
+.psi-dato-grande { margin: 0 0 12px; color: var(--navy); font-size: 40px; font-weight: 800; line-height: 1; }
+.psi-dato-grande span { color: var(--muted); font-size: 20px; font-weight: 600; }
+
+.psi-metricas { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; }
+.psi-metricas li { color: var(--muted); font-size: 13.5px; }
+.psi-metricas strong { color: var(--navy); }
+
+.psi-texto { margin: 14px 0 0; color: var(--muted); font-size: 14.5px; line-height: 1.65; }
+
+/* Banner "guardar resultados" (login con Google post-hoc, ver GuardarResultados.jsx) */
+.psi-guardar-bloque {
+  background: var(--card);
+  border: 1px dashed var(--line);
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin: 18px 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  justify-content: space-between;
+}
+.psi-guardar-bloque .psi-texto { margin: 0; flex: 1 1 260px; }
+.hist-card { cursor: pointer; transition: box-shadow 0.15s; }
+.hist-card:hover { box-shadow: var(--shadow-sm); }
+
+.psi-guardado {
+  margin: 18px 0;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: #e6f6ec;
+  color: #1b6b3a;
+  font-size: 14.5px;
+  font-weight: 600;
+}
+.psi-listas { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+.psi-listas ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 14.5px; line-height: 1.7; }
+.psi-nota { color: var(--muted); font-size: 12.5px; text-align: center; margin: 8px 0 30px; }
+
+@media (max-width: 620px) {
+  /* Las caritas SÍ caben en una fila de 5 en móvil (a diferencia de las
+     etiquetas de texto, que se partían en 2+2+1): se mantiene el continuo
+     ordenado y solo se achica la carita y su etiqueta. */
+  .psi-escala { gap: 5px; }
+  .psi-escala button { padding: 8px 2px; font-size: 10.5px; gap: 3px; }
+  .psi-escala button svg { width: 28px; height: 28px; }
+  .psi-opciones { grid-template-columns: 1fr; }
+  .psi-rasgo-nombre { flex: 0 0 130px; font-size: 12.5px; }
+}

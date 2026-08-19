@@ -1,0 +1,96 @@
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import Nav from './Nav'
+import { VIEWBOX, DEPARTAMENTOS_SVG } from './data/guatemalaDeptos'
+import { REGIONES } from './data/regiones'
+import './App.css'
+
+// Únicos departamentos con carreras cargadas hoy (ver backend/data/*.json).
+// Agregar un depto aquí en cuanto tenga catálogo (no requiere tocar el SVG).
+const ACTIVOS = new Set(['Totonicapán', 'Quetzaltenango'])
+
+// Departamento -> región a la que pertenece.
+const REGION_DE = new Map(REGIONES.flatMap((r) => r.deptos.map((d) => [d, r])))
+
+export default function Mapa() {
+  const navigate = useNavigate()
+  const [modo, setModo] = useState('depto') // 'depto' | 'region'
+
+  function irADepto(nombre) {
+    navigate(`/chat?depto=${encodeURIComponent(nombre)}`)
+  }
+
+  function irARegion(region) {
+    navigate(`/chat?depto=${encodeURIComponent(region.deptos.join(','))}`)
+  }
+
+  return (
+    <div className="pagina">
+      <Nav />
+      <div className="mapa-page">
+      <span className="pasos-kicker">Explora el mapa</span>
+      <h1>¿Dónde te gustaría estudiar?</h1>
+      <p>{modo === 'depto' ? 'Toca un departamento para ver sus carreras.' : 'Toca una región para ver sus carreras.'}</p>
+
+      <div className="mapa-modos">
+        <button className={modo === 'depto' ? 'sel' : ''} onClick={() => setModo('depto')}>Por departamento</button>
+        <button className={modo === 'region' ? 'sel' : ''} onClick={() => setModo('region')}>Por región</button>
+      </div>
+
+      <div className="mapa-panel">
+      <svg className="mapa-svg" viewBox={VIEWBOX}>
+        {DEPARTAMENTOS_SVG.map(({ nombre, d }) => {
+          if (modo === 'depto') {
+            const activo = ACTIVOS.has(nombre)
+            return (
+              <path
+                key={nombre}
+                d={d}
+                className={`depto ${activo ? 'activo' : 'inactivo'}`}
+                onClick={activo ? () => irADepto(nombre) : undefined}
+              >
+                <title>{activo ? nombre : `${nombre} (próximamente)`}</title>
+              </path>
+            )
+          }
+
+          const region = REGION_DE.get(nombre)
+          const activa = region.deptos.some((dep) => ACTIVOS.has(dep))
+          // mismo azul de marca que en modo departamento, sin color
+          // por región. Los dos deptos con catálogo (Totonicapán y
+          // Quetzaltenango) caen en la MISMA región (VI, Suroccidente), así que
+          // nunca hay dos activas que distinguir. Si algún día se carga otra
+          // región, volver a un color por índice de la paleta.
+          return (
+            <path
+              key={nombre}
+              d={d}
+              className={`depto ${activa ? 'activo' : 'inactivo'}`}
+              onClick={activa ? () => irARegion(region) : undefined}
+            >
+              <title>
+                {`Región ${region.id} - ${region.nombre}`}
+                {activa ? '' : ' (próximamente)'}
+              </title>
+            </path>
+          )
+        })}
+      </svg>
+
+      <div className="mapa-legend">
+        <span className="mapa-legend-item">
+          <i className="mapa-legend-dot activo" /> Disponible
+        </span>
+        <span className="mapa-legend-item">
+          <i className="mapa-legend-dot inactivo" /> Próximamente
+        </span>
+      </div>
+      </div>
+
+      <button className="mapa-ambos-btn" onClick={() => navigate('/chat?depto=Ambos')}>
+        Ver todas las carreras (Ambos) →
+      </button>
+      </div>
+    </div>
+  )
+}

@@ -1,0 +1,89 @@
+{
+  "departamento": "Quetzaltenango",
+  "centro": "CUNOC",
+  "universidad": "USAC",
+  "carreras": [
+    {
+      "nombre": "Licenciatura en Ciencias Jurídicas y Sociales",
+      "perfil_id": "ciencias_juridicas",
+      "sello": "Fuerte enfoque en derechos humanos, pluralismo jurídico y Derecho Indígena, con mirada crítica a la multiculturalidad de Guatemala e investigación interdisciplinaria (sociología, antropología, criminología)."
+    },
+    {
+      "nombre": "Contaduría Pública y Auditoría",
+      "perfil_id": "contaduria",
+      "sello": "Enfoque en auditoría científica orientada a detectar fraudes, con fuerte anclaje en la economía política de Centroamérica."
+    },
+    {
+      "nombre": "Administración de Empresas",
+      "perfil_id": "administracion_empresas",
+      "sello": "Visión socioeconómica pragmática: la empresa entendida como motor de desarrollo dentro de su entorno social."
+    },
+    {
+      "nombre": "Licenciatura en Economía",
+      "perfil": "Arquetipo: El Analista Científico de la Realidad Socioeconómica. AFINIDAD (ser): curiosidad por las causas de la pobreza, la riqueza, el desarrollo y el subdesarrollo; interés por la historia, la política y las estructuras de poder que moldean la economía; mentalidad científica y rigurosa para datos y fenómenos sociales; vocación de planificación y solución de los grandes problemas socioeconómicos de Guatemala; pensamiento abstracto y modelación matemática; compromiso con el desarrollo desde la política pública o la investigación. HABILIDADES (saber hacer): análisis macro y microeconómico; econometría y métodos cuantitativos avanzados; investigación socioeconómica; evaluación de proyectos y políticas públicas; planificación económica y análisis demográfico; comprensión histórico-política de la economía. ENTORNO: centros de investigación, gobierno (Banco de Guatemala, Finanzas), organismos internacionales; bases de datos, software estadístico y modelos; trabajo intelectual profundo y autónomo; alta responsabilidad (sus análisis informan política nacional). GUSTOS TEMÁTICOS: la realidad socioeconómica de Guatemala y Centroamérica; historia económica y doctrinas; ciclos y crisis económicas; pobreza, desigualdad y desarrollo; econometría; finanzas públicas, política monetaria y comercio internacional. ESTILO COGNITIVO: abstracto y modelador; analítico y crítico; sistémico y contextual; inductivo y deductivo."
+    },
+    {
+      "nombre": "Psicología (PEM y Licenciatura)",
+      "perfil": "Arquetipo: El Científico del Comportamiento y la Salud Mental. AFINIDAD (ser): curiosidad por el ser humano (mente, conducta, motivaciones, sufrimiento); vocación de ayuda y alivio del malestar psíquico; empatía y escucha con rigor científico y distancia terapéutica; estabilidad emocional y autoconocimiento; interés por la ciencia, la investigación experimental y las bases biológicas de la conducta; ética inquebrantable con la confidencialidad. HABILIDADES (saber hacer): evaluación y psicodiagnóstico (tests psicométricos y proyectivos); intervención clínica y psicoterapia; investigación experimental en laboratorio; neuropsicología y psicofarmacología; docencia y orientación (sello del PEM); psicología aplicada a la educación, el derecho y el trabajo. ENTORNO: consultorio, hospital, clínica de salud mental, centro educativo, juzgado, empresa; el laboratorio de psicología experimental como sello; relación terapéutica íntima; equipos multidisciplinarios; supervisión clínica. GUSTOS TEMÁTICOS: la mente y las relaciones interpersonales; salud y enfermedad mental; bases biológicas de la conducta; psicometría; escuelas del pensamiento psicológico; la docencia. ESTILO COGNITIVO: científico y clínico a la vez; observación y análisis de patrones; asociativo y simbólico; tolerancia a la ambigüedad emocional."
+    },
+    {
+      "nombre": "Pedagogía (PEM en Comunicación y Lenguaje y Lic. en Diseño Curricular)",
+      "perfil": "Arquetipo: El Educador Comunicador y Arquitecto del Currículo. AFINIDAD (ser): vocación de enseñanza y fe en el poder transformador de la educación; amor por la lengua, la literatura y la comunicación; creatividad para diseñar experiencias de aprendizaje; interés por la filosofía y la epistemología; visión crítica del sistema educativo y deseo de transformarlo desde el currículo; paciencia y empatía con estudiantes. HABILIDADES (saber hacer): mediación pedagógica y didáctica; diseño y evaluación curricular; comunicación oral y escrita avanzada; práctica docente supervisada y manejo del aula; pensamiento epistemológico y de la complejidad; investigación y producción de materiales educativos. ENTORNO: el aula de secundaria o universidad; el taller como metodología práctica y colaborativa; diseño curricular en ministerios, editoriales o planificación educativa; trabajo con adolescentes, jóvenes y comunidades. GUSTOS TEMÁTICOS: la lengua, la literatura y el poder de la palabra; el proceso de enseñanza-aprendizaje; la filosofía y epistemología de la educación; el diseño de currículos y materiales; la comunicación como herramienta pedagógica. ESTILO COGNITIVO: complejo y sistémico; creativo y pragmático; reflexivo y metacognitivo; hermenéutico."
+    },
+    {
+      "nombre": "Trabajo Social",
+      "perfil_id": "trabajo_social",
+      "sello": "Fuerte foco en interculturalidad y autodeterminación de los pueblos, con vocación de puente entre comunidad, Estado y cooperación internacional."
+    },
+    {
+      "nombre": "Médico y Cirujano",
+      "perfil_id": "medico_cirujano",
+      "sello": "Sello propio en salud pública y prevención, con el EPS rural como experiencia central de la formación."
+    },
+    {
+      "nombre": "Ingeniería Mecánica",
+      "perfil": "Arquetipo: El Creador de Máquinas, Energía y Soluciones Físicas. AFINIDAD (ser): fascinación por cómo funcionan motores, máquinas, estructuras y sistemas térmicos; pasión por diseñar, construir y optimizar artefactos físicos; inclinación por las matemáticas y la física como lenguajes de la realidad; mentalidad práctica de resolución de problemas tangibles; creatividad para soluciones mecánicas; gusto por el taller, la experimentación y la precisión técnica. HABILIDADES (saber hacer): diseño mecánico y CAD (modelos 3D); análisis y cálculo estructural, térmico y de fluidos; termodinámica y mecánica de fluidos (energía, refrigeración, calefacción); ciencia de materiales y procesos de manufactura; gestión de proyectos de ingeniería; inglés técnico. ENTORNO: mixto, oficina de diseño y planta/taller/laboratorio/campo; equipos multidisciplinarios; proyectos con plazos, presupuestos y especificaciones; interacción con proveedores, clientes y operarios; cultura de mejora continua, eficiencia y seguridad industrial. GUSTOS TEMÁTICOS: máquinas, motores y sistemas mecánicos; la energía (térmica, hidráulica, eólica); los materiales y sus propiedades; procesos de manufactura y automatización; matemáticas y física aplicadas; el diseño de productos tangibles. ESTILO COGNITIVO: espacial y mecánico (visualiza en 3D, entiende fuerzas); lógico-matemático aplicado; analítico-sintético; orientado a la optimización y la eficiencia."
+    },
+    {
+      "nombre": "Ingeniería en Administración de Tierras",
+      "perfil": "Arquetipo: El Ingeniero del Territorio, la Propiedad y el Catastro. AFINIDAD (ser): interés por la tierra como recurso físico y legal; gusto por la precisión técnica (topografía) y el orden jurídico (Registro de la Propiedad); vocación de ordenamiento territorial y resolución de conflictos agrarios; disfrute del trabajo de campo y gabinete; compromiso con la justicia social y la equidad en el acceso a la tierra. HABILIDADES (saber hacer): topografía y geodesia; Sistemas de Información Geográfica (SIG) para gestionar información espacial; gestión catastral y registral; ordenamiento territorial y conflictividad agraria; liderazgo de equipos multidisciplinarios. ENTORNO: mitad oficina (SIG, análisis legal) y mitad campo (levantamientos topográficos de alta precisión); gobierno (Registro de la Propiedad, Catastro), municipalidades, desarrollo rural. GUSTOS TEMÁTICOS: mapas, GPS, drones; leyes de propiedad y registro; resolución de conflictos por la tierra; planificación del territorio. ESTILO COGNITIVO: integrador técnico-jurídico (une la medición física con la norma legal); pensamiento espacial muy desarrollado; alta rigurosidad y precisión."
+    },
+    {
+      "nombre": "Ingeniería en Gestión Ambiental Local",
+      "perfil": "Arquetipo: El Ingeniero de la Sostenibilidad Comunitaria. AFINIDAD (ser): pasión por proteger el medio ambiente desde lo local y comunitario; fe en la participación ciudadana y la equidad de género como motor de cambio; conciencia ecológica profunda con mentalidad práctica de ingeniero; compromiso social y respeto por la cultura. HABILIDADES (saber hacer): gestión de proyectos ambientales locales; facilitación de procesos participativos comunitarios; investigación aplicada a problemas ambientales; uso de dispositivos electrónicos para monitoreo y gestión de información ambiental; comunicación para la incidencia y la educación ambiental. ENTORNO: el municipio, la comunidad, la microcuenca; trabajo de campo en contacto con la gente y los recursos; rol de puente entre comunidad, municipalidad y entidades ambientales. GUSTOS TEMÁTICOS: agua, bosques, suelo y residuos sólidos a nivel local; legislación ambiental municipal; organización comunitaria para gestionar recursos; la sostenibilidad como principio. ESTILO COGNITIVO: sistémico local (el ambiente como sistema socio-ecológico); estratégico y participativo; pragmático (soluciones viables con recursos limitados)."
+    },
+    {
+      "nombre": "Ingeniería Civil",
+      "perfil_id": "ingenieria_civil",
+      "sello": "Formación con componente de docencia e investigación, orientada a las grandes obras que transforman el entorno."
+    },
+    {
+      "nombre": "Ingeniería Industrial",
+      "perfil_id": "ingenieria_industrial",
+      "sello": "Fuerte componente de investigación de operaciones y seguridad e higiene industrial."
+    },
+    {
+      "nombre": "Ingeniería Mecánica Industrial",
+      "perfil": "Arquetipo: El Ingeniero Híbrido de la Máquina y la Fábrica. AFINIDAD (ser): pasión por las máquinas (diseñar, construir, mantener) dentro de un contexto industrial y de gestión; interés tanto por la máquina como por la fábrica que la contiene; gusto por la innovación y el emprendimiento tecnológico; mentalidad práctica de taller. HABILIDADES (saber hacer): combina el diseño mecánico (máquinas, mecanismos, plantas de vapor) con la gestión industrial (control de producción, logística, calidad, administración); termodinámica, fluidos y motores por un lado; investigación de operaciones y proyectos por el otro. ENTORNO: híbrido, taller de diseño mecánico y planta de producción; tornos, soldadura, motores y también software de gestión y control. GUSTOS TEMÁTICOS: las máquinas y su eficiencia dentro del sistema productivo; la automatización industrial; la gestión del mantenimiento; el diseño de productos innovadores y su fabricación. ESTILO COGNITIVO: dual mecánico-sistémico (el detalle de una pieza y el flujo de toda la fábrica); creativo para el diseño, riguroso para la gestión; orientado a integrar tecnología y procesos."
+    },
+    {
+      "nombre": "Ingeniería en Ciencias y Sistemas",
+      "perfil_id": "ingenieria_sistemas",
+      "sello": "Enfoque en inteligencia artificial y emprendimiento tecnológico: forma constructores de sistemas orientados a crear startups."
+    },
+    {
+      "nombre": "Arquitectura",
+      "perfil_id": "arquitectura",
+      "sello": "Formación centrada en el vínculo entre arte y técnica constructiva, con fuerte estudio de la arquitectura guatemalteca y el dibujo como forma de pensar."
+    },
+    {
+      "nombre": "Cirujano Dentista",
+      "perfil_id": "cirujano_dentista",
+      "sello": "Fuerte mentalidad emprendedora orientada a administrar un consultorio propio."
+    },
+    {
+      "nombre": "Licenciatura en la Enseñanza de la Matemática y la Física",
+      "perfil": "Arquetipo: El Docente que Revela la Belleza y el Poder de las Ciencias Exactas. AFINIDAD (ser): vocación de enseñanza con amor particular por las matemáticas y la física; paciencia y gusto por hacer comprensibles conceptos abstractos y difíciles; mentalidad lógica, rigurosa y apasionada por resolver problemas; interés por formar futuros científicos e ingenieros; compromiso con mejorar la educación científica del país. HABILIDADES (saber hacer): dominio profundo de matemáticas y física; didáctica de las ciencias exactas (experimentos, demostraciones, tecnología); comunicación clara y precisa de conceptos complejos; evaluación del aprendizaje en ciencias; diseño de laboratorios y materiales didácticos. ENTORNO: el aula de secundaria o universidad, el laboratorio de física; un entorno donde la pregunta '¿por qué?' es constante; trabajo con adolescentes y jóvenes con inclinación científica. GUSTOS TEMÁTICOS: la belleza de un teorema matemático; la elegancia de las leyes de la física; la resolución de problemas como un arte; la historia de las matemáticas y la física; la enseñanza como revelación del mundo. ESTILO COGNITIVO: lógico-deductivo y abstracto; simplificación didáctica (descomponer lo complejo en pasos comprensibles); alta tolerancia a la frustración pedagógica y búsqueda creativa de estrategias."
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "departamento": "Totonicapán",
+  "centro": "URG Totonicapán",
+  "universidad": "Universidad Regional de Guatemala",
+  "carreras": [
+    {
+      "nombre": "Licenciatura en Contaduría Pública y Auditoría",
+      "perfil_id": "contaduria",
+      "sello": "Se concibe como garante de la fe pública financiera ante la sociedad y el Estado, con énfasis en estabilidad y Derecho Mercantil."
+    },
+    {
+      "nombre": "Licenciatura en Ciencias Jurídicas y Sociales, Abogado y Notario",
+      "perfil_id": "ciencias_juridicas",
+      "sello": "Sello social marcado: derechos humanos, agrarios e indígenas, con foco en defender al vulnerable ante el abuso y el estudio del Estado desde la historia y la filosofía."
+    },
+    {
+      "nombre": "Licenciatura en Investigación Criminal y Forense (Criminalística)",
+      "perfil_id": "criminalistica",
+      "sello": "Formación con técnicas específicas de detalle (planimetría, lofoscopia, balística, grafotecnia) y fuerte componente de reconstrucción de hechos."
+    },
+    {
+      "nombre": "Licenciatura en Administración de Empresas",
+      "perfil_id": "administracion_empresas",
+      "sello": "Enfoque emprendedor: las organizaciones como sistemas humanos y financieros, con foco en el riesgo calculado y la creación de valor."
+    },
+    {
+      "nombre": "Licenciatura en Administración de Sistemas Informáticos",
+      "perfil": "Arquetipo: El Traductor Estratégico entre la Tecnología y el Negocio. AFINIDAD (ser): pasión por la tecnología para resolver problemas reales de negocio; interés dual y equilibrado por la gestión administrativa y el mundo digital; disfrute de la lógica, la resolución de problemas y la optimización de procesos; creatividad innovadora para diseñar soluciones y emprendimientos tecnológicos; visión de futuro (IA, IoT, Cloud). HABILIDADES (saber hacer): gestión de proyectos tecnológicos (alcance, tiempo, presupuesto); análisis y diseño de sistemas (puente entre usuario y programadores); habilidades técnicas (programación, bases de datos, redes, seguridad); emprendimiento tecnológico (comercio electrónico, marketing digital); pensamiento data-driven (ciencia de datos para decisiones); auditoría y control de sistemas. ENTORNO: mixto, frente a la computadora (desarrollo, análisis) y en reuniones con usuarios y directivos; aprendizaje tecnológico continuo y acelerado; trabajo por proyectos con equipos multidisciplinarios; cultura de innovación con foco en resultados de negocio. GUSTOS TEMÁTICOS: intersección entre tecnología, procesos y negocios; metodologías ágiles; seguridad informática y gestión de datos; marketing digital y comercio electrónico; inteligencia de negocios y ciencia de datos. ESTILO COGNITIVO: lógico-computacional y sistémico; bilingüismo cognitivo (lenguaje técnico y de negocio); orientado a optimización y automatización; creatividad para problemas complejos."
+    },
+    {
+      "nombre": "Licenciatura en Ciencias de la Comunicación (Técnico en Publicidad)",
+      "perfil": "Arquetipo: El Ingeniero del Deseo y Constructor de Marcas. AFINIDAD (ser): interés por el comportamiento humano, lo que motiva y persuade; creatividad e imaginación desbordante con fuerte sentido estético; mentalidad estratégica para influir en la opinión y el consumo; disfrute de la cultura pop, las tendencias y los medios; pasión por lo visual, el storytelling y los mensajes impactantes. HABILIDADES (saber hacer): pensamiento creativo-estratégico (ideas originales con objetivo de negocio); comunicación persuasiva y copywriting; habilidades visuales y de producción (diseño gráfico, fotografía, audiovisual); planificación y gestión de campañas (medios, presupuestos, equipos); análisis de mercado y del consumidor; dominio de herramientas digitales (redes, contenidos, SEM/SEO). ENTORNO: creativo y dinámico (agencias, departamentos de marketing); trabajo por proyectos con cierres y pitches; colaboración con directores de arte, redactores y planners; cultura cool con presión por resultados medibles (ROI). GUSTOS TEMÁTICOS: el arte de la persuasión y la retórica visual; marcas y branding; cultura del consumo y tendencias; semiótica del discurso comercial y político; tecnología aplicada a la comunicación. ESTILO COGNITIVO: lateral y divergente (conexiones inesperadas); empático-proyectivo (meterse en la mente del consumidor); visual-simbólico (imágenes, metáforas, signos); sintético (mensaje complejo en 30 segundos)."
+    },
+    {
+      "nombre": "Licenciatura en Ciencias de la Comunicación (Técnico en Periodismo)",
+      "perfil_id": "periodismo",
+      "sello": "La calle como oficina principal: fuerte énfasis en el trabajo de campo y el relato de la identidad e historia viva de Guatemala."
+    },
+    {
+      "nombre": "Licenciatura en Psicología Clínica",
+      "perfil_id": "psicologia_clinica",
+      "sello": "Fuerte componente de neurociencia y bases biológicas de la conducta, con mirada al desarrollo humano de la infancia a la vejez."
+    },
+    {
+      "nombre": "Licenciatura en Psicología Industrial",
+      "perfil_id": "psicologia_industrial",
+      "sello": "Enfoque práctico en legislación laboral, dinámicas sindicales e indicadores medibles (rotación, ausentismo, productividad)."
+    },
+    {
+      "nombre": "Licenciatura en Trabajo Social",
+      "perfil_id": "trabajo_social",
+      "sello": "Enfoque en investigación-acción participativa y empoderamiento comunitario en contextos de alta vulnerabilidad (barrios marginales, áreas rurales)."
+    }
+  ]
+}
