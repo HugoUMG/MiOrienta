@@ -274,7 +274,10 @@ async function obtenerCarreras(respuestas) {
     const reg = await post('/api/register', { nombre: respuestas.nombre || 'Anónimo' })
     if (reg.ok) {
       estudiante_id = (await reg.json()).id
-      await post('/api/submit-survey', { estudiante_id, respuestas })
+      // El session_id acompana el recorrido entero (Holland -> chat): sin el,
+      // esta fila queda huerfana y el tope diario cuenta dos evaluaciones donde
+      // el alumno hizo una sola. Tambien es por donde /historial/reclamar cruza.
+      await post('/api/submit-survey', { estudiante_id, respuestas, session_id: sessionId() })
     }
   } catch {
     /* backend caído para guardar: seguimos al análisis igual */

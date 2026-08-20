@@ -64,8 +64,10 @@ dos límites (`backend/app/cuota.py`):
 
 - **Enfriamiento** entre evaluaciones terminadas, por instrumento
   (`MINUTOS_ENFRIAMIENTO`, 10 por defecto).
-- **Tope por alumno** de evaluaciones en 24 horas, sumando instrumentos
-  (`MAX_EVALUACIONES_DIARIAS`, 3 por defecto), en ventana deslizante.
+- **Tope por alumno** de recorridos en 24 horas (`MAX_EVALUACIONES_DIARIAS`,
+  3 por defecto), en ventana deslizante. Un recorrido es lo que el alumno vive
+  como una evaluación: hacer Holland y seguir al chat cuenta **una**, porque
+  comparten `session_id`.
 - **Tope global diario** de tokens de Gemini (`TOPE_TOKENS_DIARIO`), como freno
   de emergencia del crédito.
 
