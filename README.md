@@ -114,35 +114,99 @@ cd backend && uv run python -m app.cuota && uv run python -m app.auth && uv run 
 
 ## Despliegue en Render
 
-El repositorio trae `render.yaml`, que describe los tres componentes: la base de
-datos PostgreSQL, la API y el sitio. En Render se usa con **Blueprints > New
-Blueprint Instance**, apuntando a este repositorio.
+Son tres piezas: la base de datos, la API y el sitio. Se crean en ese orden,
+porque cada una necesita la URL de la anterior.
 
-Render pide al crear los servicios las claves que no viven en el repositorio:
-`GEMINI_API_KEY`, `ONET_API_KEY` y `GOOGLE_CLIENT_ID` para la API, y
-`VITE_API_URL` y `VITE_GOOGLE_CLIENT_ID` para el sitio. `SESSION_SECRET` lo
-genera Render solo, y `DATABASE_URL` sale de la base del blueprint.
+El repositorio trae un `render.yaml`, pero los Blueprints de Render piden plan de
+pago. En el plan gratuito los tres servicios se crean a mano, con los valores de
+abajo; el archivo queda como referencia de la configuración y sirve el día que se
+pase a un plan pago.
 
-Después del primer despliegue quedan dos pasos manuales:
+### 1. Base de datos
 
-1. **Permitir el origen del sitio.** Copiar la URL del servicio `orienta-web`
-   (algo como `https://orienta-web.onrender.com`) a la variable
-   `ORIGENES_PERMITIDOS` de `orienta-api`. Sin eso, el navegador bloquea cada
-   llamada por CORS.
+**New > Postgres.** Plan **Free**, y anotar la región elegida: los otros dos
+servicios tienen que ir en la misma. Al terminar, copiar la **Internal Database
+URL** (la interna, no la externa: es la que usan los servicios de Render entre
+sí).
+
+La URL viene como `postgres://…`; no hay que convertirla, el backend la
+normaliza al arrancar.
+
+### 2. API
+
+**New > Web Service**, conectando este repositorio.
+
+| Campo | Valor |
+|---|---|
+| Root Directory | `backend` |
+| Language | Python 3 |
+| Build Command | `pip install -r requirements.txt` |
+| Start Command | `python seed_carreras.py && uvicorn app.main:app --host 0.0.0.0 --port $PORT` |
+| Health Check Path | `/health` |
+| Instance Type | Free |
+
+Variables de entorno:
+
+| Variable | Valor |
+|---|---|
+| `DATABASE_URL` | la Internal Database URL del paso 1 |
+| `GEMINI_API_KEY` | la clave de Gemini |
+| `ONET_API_KEY` | la clave de O*NET |
+| `GOOGLE_CLIENT_ID` | el client id de OAuth |
+| `SESSION_SECRET` | una cadena aleatoria larga, ver abajo |
+| `ORIGENES_PERMITIDOS` | se llena en el paso 4 |
+
+El secreto de sesión se genera así, y cambiarlo cierra todas las sesiones
+abiertas:
+
+```bash
+python -c "import secrets; print(secrets.token_hex(32))"
+```
+
+Al terminar el despliegue, copiar la URL del servicio. `GET /health` debe
+responder `{"status":"ok"}`.
+
+### 3. Sitio
+
+**New > Static Site**, el mismo repositorio.
+
+| Campo | Valor |
+|---|---|
+| Root Directory | `frontend` |
+| Build Command | `npm ci && npm run build` |
+| Publish Directory | `dist` |
+
+Variables de entorno:
+
+| Variable | Valor |
+|---|---|
+| `VITE_API_URL` | la URL de la API del paso 2 |
+| `VITE_GOOGLE_CLIENT_ID` | el mismo client id de OAuth |
+
+Y en la pestaña **Redirects/Rewrites**, una regla: origen `/*`, destino
+`/index.html`, acción **Rewrite**. La app es de una sola página y las rutas las
+resuelve React Router; sin esa regla, entrar directo a `/holland` o recargar da
+404.
+
+### 4. Los dos cabos que quedan
+
+1. **Permitir el origen del sitio.** Poner la URL del sitio en
+   `ORIGENES_PERMITIDOS` de la API. Sin eso el navegador bloquea cada llamada
+   por CORS, y el síntoma es una app que carga bien pero no responde a nada.
 2. **Autorizar esa URL en Google.** En Google Cloud Console, en el cliente OAuth,
-   agregarla a los orígenes autorizados de JavaScript. Sin eso, el botón de
-   iniciar sesión no carga y nadie puede evaluarse.
+   agregarla a los orígenes autorizados de JavaScript. Sin eso el botón de
+   iniciar sesión no aparece y nadie puede evaluarse.
 
-Detalles que conviene saber de antemano:
+### Detalles que conviene saber
 
 - `VITE_API_URL` y `VITE_GOOGLE_CLIENT_ID` **se congelan al compilar**. Si cambia
-  cualquiera de las dos, hay que volver a desplegar el sitio; guardarlas en el
+  cualquiera de las dos hay que volver a desplegar el sitio; guardarlas en el
   panel no basta.
 - El catálogo se carga en cada arranque de la API. `seed_carreras.py` es
   idempotente, así que repetirlo no duplica carreras.
-- En el plan gratuito, la base de datos de Render **expira a los 30 días** y los
-  servicios se duermen tras un rato sin tráfico, de modo que la primera visita
-  después de la pausa tarda cerca de un minuto en responder.
+- En el plan gratuito la base de datos **expira a los 30 días** y los servicios
+  se duermen sin tráfico, de modo que la primera visita después de la pausa tarda
+  cerca de un minuto.
 - `backend/requirements.txt` está generado desde `uv.lock`. Al cambiar
   dependencias hay que regenerarlo, si no Render seguiría instalando las viejas:
 

@@ -1,8 +1,12 @@
 # Despliegue en Render: base de datos, API y sitio.
 #
-# Se usa desde el panel de Render con Blueprints > New Blueprint Instance,
-# apuntando a este repositorio. Las claves marcadas `sync: false` no viven aqui:
-# Render las pide al crear el servicio y quedan guardadas de su lado.
+# OJO: los Blueprints de Render piden plan de pago. En el plan gratuito los
+# tres servicios se crean a mano, con los valores que estan en el README; este
+# archivo queda como referencia de la configuracion y sirve el dia que se pase
+# a un plan pago, desde Blueprints > New Blueprint Instance.
+#
+# Las claves marcadas `sync: false` no viven aqui: Render las pide al crear el
+# servicio y quedan guardadas de su lado.
 #
 # Despues del primer despliegue faltan dos pasos que no se pueden automatizar
 # desde aqui, los dos explicados en el README:
