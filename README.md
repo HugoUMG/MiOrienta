@@ -124,13 +124,29 @@ pase a un plan pago.
 
 ### 1. Base de datos
 
-**New > Postgres.** Plan **Free**, y anotar la región elegida: los otros dos
-servicios tienen que ir en la misma. Al terminar, copiar la **Internal Database
-URL** (la interna, no la externa: es la que usan los servicios de Render entre
-sí).
+La base **no tiene que estar en Render**, y conviene que no lo esté: la de su
+plan gratuito se borra a los 30 días. Cualquier PostgreSQL administrado sirve,
+porque `app/db.py` normaliza la URL al driver del proyecto.
 
-La URL viene como `postgres://…`; no hay que convertirla, el backend la
-normaliza al arrancar.
+**Opción recomendada: [Neon](https://neon.com).** Plan gratuito sin fecha de
+vencimiento. Suspende el cómputo a los 5 minutos de inactividad y lo despierta
+solo en la siguiente conexión, en unos cientos de milisegundos, así que no hay
+nada que reactivar a mano. Al crear el proyecto, elegir **la misma región** donde
+va a correr la API.
+
+En el panel de Neon, botón **Connect**, y **apagar el interruptor de "Connection
+pooling"** antes de copiar la cadena. El pooler trabaja en modo transacción y no
+lleva bien los *prepared statements* que psycopg usa solo; este backend es un
+servidor de larga vida, así que le corresponde la conexión directa.
+
+La cadena se pega tal cual, con su `?sslmode=require` incluido.
+
+**Alternativa: la base de Render.** New > Postgres, plan Free, misma región que
+los otros servicios, y se copia la **Internal Database URL**. Sirve para probar,
+pero hay que tener presente que expira.
+
+Con la base creada, no hace falta cargar el catálogo a mano: la API lo hace en su
+primer arranque.
 
 ### 2. API
 
