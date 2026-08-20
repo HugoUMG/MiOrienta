@@ -1,0 +1,67 @@
+# Despliegue en Render: base de datos, API y sitio.
+#
+# Se usa desde el panel de Render con Blueprints > New Blueprint Instance,
+# apuntando a este repositorio. Las claves marcadas `sync: false` no viven aqui:
+# Render las pide al crear el servicio y quedan guardadas de su lado.
+#
+# Despues del primer despliegue faltan dos pasos que no se pueden automatizar
+# desde aqui, los dos explicados en el README:
+#   1. poner la URL del sitio en ORIGENES_PERMITIDOS de la API,
+#   2. autorizar esa misma URL en el cliente OAuth de Google.
+
+databases:
+  - name: orienta-db
+    databaseName: orienta
+    user: orienta
+    plan: free
+
+services:
+  - type: web
+    name: orienta-api
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    # El catalogo se carga en cada arranque: seed_carreras.py es idempotente
+    # (actualiza por centro y nombre), asi que repetirlo no duplica carreras y
+    # evita depender de una consola que el plan gratuito no da.
+    startCommand: python seed_carreras.py && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: orienta-db
+          property: connectionString
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: ONET_API_KEY
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      # La URL del sitio de abajo, ya desplegado. Varias se separan con coma.
+      - key: ORIGENES_PERMITIDOS
+        sync: false
+
+  - type: web
+    name: orienta-web
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    # La app es de una sola pagina: cualquier ruta la resuelve React Router, no
+    # el servidor. Sin esto, entrar directo a /holland o recargar da 404.
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      # Vite congela estas dos en el build: cambiarlas exige volver a desplegar
+      # el sitio, no basta con guardarlas en el panel.
+      - key: VITE_API_URL
+        sync: false
+      - key: VITE_GOOGLE_CLIENT_ID
+        sync: false

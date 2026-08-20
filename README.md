@@ -112,6 +112,46 @@ cd backend && uv run python -m app.cuota && uv run python -m app.auth && uv run 
 
 ---
 
+## Despliegue en Render
+
+El repositorio trae `render.yaml`, que describe los tres componentes: la base de
+datos PostgreSQL, la API y el sitio. En Render se usa con **Blueprints > New
+Blueprint Instance**, apuntando a este repositorio.
+
+Render pide al crear los servicios las claves que no viven en el repositorio:
+`GEMINI_API_KEY`, `ONET_API_KEY` y `GOOGLE_CLIENT_ID` para la API, y
+`VITE_API_URL` y `VITE_GOOGLE_CLIENT_ID` para el sitio. `SESSION_SECRET` lo
+genera Render solo, y `DATABASE_URL` sale de la base del blueprint.
+
+Después del primer despliegue quedan dos pasos manuales:
+
+1. **Permitir el origen del sitio.** Copiar la URL del servicio `orienta-web`
+   (algo como `https://orienta-web.onrender.com`) a la variable
+   `ORIGENES_PERMITIDOS` de `orienta-api`. Sin eso, el navegador bloquea cada
+   llamada por CORS.
+2. **Autorizar esa URL en Google.** En Google Cloud Console, en el cliente OAuth,
+   agregarla a los orígenes autorizados de JavaScript. Sin eso, el botón de
+   iniciar sesión no carga y nadie puede evaluarse.
+
+Detalles que conviene saber de antemano:
+
+- `VITE_API_URL` y `VITE_GOOGLE_CLIENT_ID` **se congelan al compilar**. Si cambia
+  cualquiera de las dos, hay que volver a desplegar el sitio; guardarlas en el
+  panel no basta.
+- El catálogo se carga en cada arranque de la API. `seed_carreras.py` es
+  idempotente, así que repetirlo no duplica carreras.
+- En el plan gratuito, la base de datos de Render **expira a los 30 días** y los
+  servicios se duermen tras un rato sin tráfico, de modo que la primera visita
+  después de la pausa tarda cerca de un minuto en responder.
+- `backend/requirements.txt` está generado desde `uv.lock`. Al cambiar
+  dependencias hay que regenerarlo, si no Render seguiría instalando las viejas:
+
+```bash
+cd backend && uv export --no-hashes --no-emit-project --format requirements-txt -o requirements.txt
+```
+
+---
+
 ## Estructura
 
 ```
