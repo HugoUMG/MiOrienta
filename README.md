@@ -62,14 +62,15 @@ el prompt quepa y cueste menos.
 Iniciar sesión con Google es **obligatorio** para evaluarse. Encima del login hay
 dos límites (`backend/app/cuota.py`):
 
-- **Enfriamiento** entre evaluaciones terminadas, por instrumento
-  (`MINUTOS_ENFRIAMIENTO`, 10 por defecto).
-- **Tope por alumno** de recorridos en 24 horas (`MAX_EVALUACIONES_DIARIAS`,
-  3 por defecto), en ventana deslizante. Un recorrido es lo que el alumno vive
-  como una evaluación: hacer Holland y seguir al chat cuenta **una**, porque
-  comparten `session_id`.
+- **Tope por alumno**: `MAX_CHATS_DIARIOS` (3 por defecto) chats terminados en
+  una ventana deslizante de 24 horas.
 - **Tope global diario** de tokens de Gemini (`TOPE_TOKENS_DIARIO`), como freno
   de emergencia del crédito.
+
+Se limita **solo el chat**, que es lo único que gasta Gemini. El test de Holland
+lo califica O*NET, responder sus 60 ítems toma un cuarto de hora, y repetirlo no
+le cuesta nada a nadie: no tiene límite, y sigue disponible aunque la app ya haya
+gastado su presupuesto del día.
 
 Los dos responden **429** con un mensaje que dice cuándo se puede volver. El
 **503** queda reservado para "el servidor no está configurado".
