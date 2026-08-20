@@ -63,7 +63,7 @@ Iniciar sesión con Google es **obligatorio** para evaluarse. Encima del login h
 dos límites (`backend/app/cuota.py`):
 
 - **Enfriamiento** entre evaluaciones terminadas, por instrumento
-  (`HORAS_ENFRIAMIENTO`, 4 por defecto).
+  (`MINUTOS_ENFRIAMIENTO`, 10 por defecto).
 - **Tope global diario** de tokens de Gemini (`TOPE_TOKENS_DIARIO`), como freno
   de emergencia del crédito.
 
