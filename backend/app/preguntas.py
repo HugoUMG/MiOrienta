@@ -6,6 +6,7 @@ haya cargadas."""
 from pydantic import BaseModel
 
 from app import holland as holland_mod
+from app.filtro import preseleccionar
 from app.recomendar import (
     ANTI_INYECCION,
     MODELO,
@@ -200,12 +201,16 @@ def siguiente_pregunta(
     `personalidad_cobertura`: {dimensión: 1}, las que ese test ya cubrió (siempre
     personalidad/valores/estilo_cognitivo); se usa para SEMBRAR la cobertura de
     la sesión y así el chat no vuelve a preguntarlas."""
-    # Sin pre-filtro: el chat ve el catálogo completo, igual que recommend.
-    # Recortarlo a 35 carreras se midió con brazo de control: no cambia la
-    # recomendación (efecto 4/8 < ruido 5/8) y cuesta 4x en caché, porque el
-    # top-35 se recalculaba tras cada respuesta y creaba un CachedContent por
-    # llamada. El catálogo completo es idéntico entre llamadas y entre alumnos,
-    # así que comparten uno solo. Por sesión eso baja el costo real al 23%.
+    # Pre-filtro sin IA: recorta el catálogo a ~35 carreras. Volvió el
+    # 2026-08-24 al abandonar el caché explícito: sin caché, el catálogo completo
+    # (~25k tok) solo infla los tokens y presiona la cuota de las keys gratis, y
+    # el A/B con control ya probó que recortar NO cambia la recomendación (efecto
+    # 4/8 < ruido 5/8). Recalculado en cada llamada; si el catálogo ya es chico,
+    # no recorta nada.
+    candidatas = preseleccionar(respuestas, carreras)
+    if len(candidatas) < len(carreras):
+        print(f"[filtro] next-question: {len(carreras)} -> {len(candidatas)} carreras candidatas")
+
     cobertura = _cobertura(session_id, personalidad_cobertura)
     hechas = sum(cobertura.values()) - sum(COBERTURA_INICIAL.values())
     pendientes = [d for d in PRIORITARIAS if not cobertura[d]]
@@ -236,11 +241,12 @@ def siguiente_pregunta(
             system=SYSTEM + (holland_mod.adenda_chat(holland_puntajes) if holland else ""),
             catalogo=(
                 "CATÁLOGO DE CARRERAS (solo para tu razonamiento; no menciones nombres):\n"
-                f"{_catalogo_texto(carreras)}"
+                f"{_catalogo_texto(candidatas)}"
             ),
             variable=variable,
             schema=SiguientePaso,
             temperature=0.5,
+            session_id=session_id,
         )
         paso = SiguientePaso.model_validate_json(_texto_seguro(resp))
         uso_total = uso_tokens(resp, MODELO)
