@@ -192,8 +192,7 @@ export const FIJAS = [
       { label: 'En una obra, con máquinas o herramientas' },
       // 'un estudio creativo' se quitó a propósito: 'estudio' es la palabra por
       // la que Radiología, Bio Imágenes y Teología entraban al pre-filtro ("el
-      // estudio solicitado", "el estudio y el servicio"). Ver
-      // experiments/banco-de-opciones.md.
+      // estudio solicitado", "el estudio y el servicio").
       { label: 'En medios de comunicación o diseñando' },
       { label: 'Con la comunidad, ayudando a personas' },
     ],
@@ -212,38 +211,45 @@ export const FIJAS = [
     // Criterio al agregarlos: nombran el TEMA, nunca la carrera (regla 2 del
     // CLAUDE.md), y se redactaron para que el alumno se reconozca, no para
     // alimentar al pre-filtro; el A/B midió que el filtro no mueve el resultado
-    // final (experiments/filtro-catalogo-ab.md).
+    // final.
+    //
+    // 'grupo' solo va en el PRIMER chip de cada bloque: Chat.jsx dibuja el
+    // título cuando el grupo cambia. Con 25 opciones una lista plana obliga a
+    // leerlas todas para no perderse la propia; en 6 grupos se leen 6 títulos y
+    // se entra a uno. Los títulos son presentación pura: NO se le mandan al
+    // modelo, que solo recibe las etiquetas que el alumno marcó, así que
+    // reagruparlos no cambia la señal ni exige volver a medir.
     clave: 'gustos',
     tipo: 'opcion',
     multiple: true,
     chips: true,
     texto: '¿Qué temas te apasionan? Elige los que quieras (o agrega el tuyo).',
     opciones: [
-      { label: 'Matemáticas y números' },
-      { label: 'Tecnología y computación' },
-      { label: 'Salud, cuidados y atención a pacientes' },
+      { grupo: 'Salud y cuerpo', label: 'Salud, cuidados y atención a pacientes' },
       { label: 'Equipos médicos, laboratorio e imágenes' },
       { label: 'Cuerpo, deporte y rehabilitación' },
-      { label: 'Biología y naturaleza' },
-      { label: 'Animales y su cuidado' },
+      { grupo: 'Ciencia, campo y animales', label: 'Biología y naturaleza' },
       { label: 'Química y laboratorio' },
+      { label: 'Animales y su cuidado' },
+      { label: 'Ambiente, agricultura y agronegocios' },
+      { grupo: 'Tecnología y cómo funcionan las cosas', label: 'Matemáticas y números' },
+      { label: 'Tecnología y computación' },
+      { label: 'Redes, señal y electrónica' },
+      { label: 'Construcción, máquinas y cómo funcionan las cosas' },
+      { grupo: 'Personas y sociedad', label: 'Enseñanza, docencia y educación' },
+      { label: 'Psicología y comportamiento' },
       { label: 'Leyes, justicia y debate' },
-      { label: 'Negocios, dinero y emprendimiento' },
-      { label: 'Economía, pobreza y desarrollo del país' },
-      { label: 'Comercio, política y otros países' },
-      { label: 'Arte, diseño y creatividad' },
+      { label: 'Historia, sociedad y cultura' },
+      { label: 'Fe, religión y espiritualidad' },
+      { grupo: 'Crear y comunicar', label: 'Arte, diseño y creatividad' },
       { label: 'Música, danza y artes escénicas' },
       { label: 'Comunicación, escritura y medios' },
       { label: 'Idiomas y otras culturas' },
-      { label: 'Enseñanza, docencia y educación' },
+      { grupo: 'Negocios y el mundo', label: 'Negocios, dinero y emprendimiento' },
+      { label: 'Economía, pobreza y desarrollo del país' },
+      { label: 'Comercio, política y otros países' },
       { label: 'Organizar y dirigir equipos o instituciones' },
-      { label: 'Psicología y comportamiento' },
-      { label: 'Ambiente, agricultura y agronegocios' },
-      { label: 'Redes, señal y electrónica' },
-      { label: 'Construcción, máquinas y cómo funcionan las cosas' },
       { label: 'Gastronomía, turismo y hotelería' },
-      { label: 'Historia, sociedad y cultura' },
-      { label: 'Fe, religión y espiritualidad' },
     ],
   },
 ]
