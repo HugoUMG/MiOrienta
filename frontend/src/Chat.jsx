@@ -8,7 +8,15 @@ import { leerPerfilPersonalidad } from './personalidad-perfil'
 import { authHeader, sesionActual } from './auth'
 import './App.css'
 import { API } from './api'
-import { CLAVES_PERFIL, FIJAS, grado } from './preguntas-fijas'
+import { CLAVES_FIJAS, CLAVES_PERFIL, FIJAS, grado, limpiaNombre } from './preguntas-fijas'
+
+// Claves de `respuestas` que NO son adaptativas. Ademas de las fijas van
+// 'departamento' (se siembra al montar el chat, viene del mapa) y
+// 'carrera_descartada' (se agrega sola en los grados que descartan). Restar
+// FIJAS.length contaba esas dos como adaptativas, asi que el chat cerraba a las
+// 3 preguntas en vez de las 4 y una dimension prioritaria se quedaba sin cubrir.
+const NO_ADAPTATIVAS = new Set([...CLAVES_FIJAS, 'departamento', 'carrera_descartada'])
+const cuentaAdaptativas = (resp) => Object.keys(resp).filter((k) => !NO_ADAPTATIVAS.has(k)).length
 
 const MIN_ADAPTATIVAS = 4 // mínimo antes de ofrecer el resultado (se siente conversación)
 const MAX_ADAPTATIVAS = 8 // tope: perfiles ambiguos afinan más, sin agotar cuota
@@ -631,7 +639,7 @@ function Chat() {
         multiple: !!q.multiple,
         opciones: q.opciones || [],
       }
-      const nAdapt = Object.keys(resp).length - FIJAS.length // adaptativas ya respondidas
+      const nAdapt = cuentaAdaptativas(resp) // adaptativas ya respondidas
       // Ofrecemos el resultado al llegar al mínimo, o antes si la IA ya se dio por
       // segura (terminado): en ese caso no genera más preguntas, forzarla daría una vacía.
       if (nAdapt >= MIN_ADAPTATIVAS || q.terminado) {
@@ -756,8 +764,12 @@ function Chat() {
 
   function submitText(e) {
     e.preventDefault()
-    const val = text.trim().replace(/\s+/g, ' ')
-    if (!val) return
+    const crudo = text.trim().replace(/\s+/g, ' ')
+    if (!crudo) return
+    // Al nombre se le quita el saludo ANTES de validar: así "Hola soy Yesi"
+    // entra como "Yesi", y quien escribió solo "Hola" cae en nombreInvalido()
+    // y se le vuelve a preguntar.
+    const val = paso?.clave === 'nombre' ? limpiaNombre(crudo) : crudo
     const valida = paso?.clave === 'nombre' ? nombreInvalido
       : paso?.clave === 'edad' ? edadInvalida
       : paso?.clave === 'carrera_cursada' ? carreraInvalida : null

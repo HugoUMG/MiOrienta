@@ -96,7 +96,10 @@ export const FIJAS = [
   {
     clave: 'nombre',
     tipo: 'texto',
-    texto: '¡Hola! Soy Orienta, tu guía vocacional. Para empezar, ¿cómo te llamas?',
+    // Sin "¿cómo te llamas?": preguntado así, el alumno contesta saludando de
+    // vuelta ("Hola soy Yesi"). Pedirlo como dato baja esa tentación, y
+    // limpiaNombre() se encarga de lo que igual venga con saludo.
+    texto: '¡Hola! Soy Orienta, tu guía vocacional. Para empezar, escribe tu nombre.',
     placeholder: 'Escribe tu nombre…',
   },
   {
@@ -265,3 +268,37 @@ export const CLAVES_FIJAS = FIJAS.map((f) => f.clave)
 // están midiendo y pueden haber cambiado.
 export const CLAVES_PERFIL = ['nombre', 'edad', 'nivel', 'grado',
   'carrera_cursada', 'gusto_grado', 'motivo']
+
+// El alumno le contesta a Orienta como si fuera una persona, así que al pedirle
+// el nombre responde saludando: llegan cosas como "Hola", "Hola soy Yesi" o
+// "me llamo Gabriela", y ese texto se usa tal cual en el chat, el dashboard, el
+// PDF y el prompt ("Mucho gusto, Hola"). Se le quita el saludo y el "me llamo".
+//
+// Lista corta de saludos, no un parser de lenguaje natural. Devolver cadena
+// vacía es a propósito: quien escribió SOLO "Hola" no dio su nombre, y
+// nombreInvalido() de Chat.jsx lo manda a escribirlo otra vez.
+const SALUDO = /^[\s,.:;!¡¿?]*(hola|holi|buenas|buenos días|buenas tardes|buenas noches|qué tal|que tal|hey)\b[\s,.:;!¡¿?]*/iu
+const PRESENTACION = /^[\s,.:;]*(me llamo|mi nombre es|yo soy|soy)\b[\s,.:;]*/iu
+
+export function limpiaNombre(v) {
+  return String(v ?? '').replace(SALUDO, '').replace(PRESENTACION, '').trim()
+}
+
+// Self-check sin framework: `node src/preguntas-fijas.js` desde frontend/.
+if (typeof process !== 'undefined' && process.argv?.[1]?.endsWith('preguntas-fijas.js')) {
+  const casos = [
+    ['Hola soy Yesi', 'Yesi'],
+    ['me llamo Gabriela', 'Gabriela'],
+    ['Hola', ''],                        // solo saludo: no dio nombre
+    ['Ana', 'Ana'],                      // el caso normal no se toca
+    ['Holanda', 'Holanda'],              // el \b evita comerse un nombre que empieza igual
+    ['Soyla', 'Soyla'],
+    ['  José  ', 'José'],
+  ]
+  for (const [entra, espera] of casos) {
+    const sale = limpiaNombre(entra)
+    if (sale !== espera) throw new Error(`limpiaNombre("${entra}") dio "${sale}", esperaba "${espera}"`)
+  }
+  console.log('ok')
+}
+
