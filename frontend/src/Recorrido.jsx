@@ -89,11 +89,15 @@ function Holland({ h, historial = [] }) {
 // Calificación del profesional que aplica el estudio. Solo aparece en /admin
 // (el historial del alumno no manda onGuardar y el panel no se dibuja): el
 // alumno no califica su propia recomendación.
+// 'descartada' no es un juicio: la marca quien aplica el estudio para sacar del
+// registro las pruebas de desarrollo y las de conocidos. Por eso va separada de
+// las otras tres en la interfaz, para que no se lea como una cuarta nota.
 const OPCIONES_JUICIO = [
   ['acerto', 'Acertó'],
   ['parcial', 'Acertó en parte'],
   ['no_acerto', 'No acertó'],
 ]
+const DESCARTADA = 'descartada'
 
 function Juicio({ valor, nota, onGuardar }) {
   const [juicio, setJuicio] = useState(valor ?? null)
@@ -131,7 +135,12 @@ function Juicio({ valor, nota, onGuardar }) {
           </button>
         ))}
       </div>
-      <textarea
+      <button
+        className={juicio === DESCARTADA ? 'opt' : 'opt ghost'}
+        onClick={() => elegir(DESCARTADA)}
+      >
+        {juicio === DESCARTADA ? '✓ Fuera del estudio' : 'No es de un alumno (sacar del registro)'}
+      </button>      <textarea
         className="rec-juicio-nota"
         rows={4}
         placeholder="Comentarios: qué matiz tiene este caso, qué habrías recomendado, qué se le escapó al sistema…"
